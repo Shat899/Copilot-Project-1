@@ -142,6 +142,29 @@ function buildTable() {
 window.addEventListener('DOMContentLoaded', () => {
   buildTable();
 
+  // Username form validation
+  document.getElementById('usernameForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const value = document.getElementById('usernameInput').value;
+    const errorEl = document.getElementById('usernameError');
+    const successEl = document.getElementById('usernameSuccess');
+    const errors = [];
+
+    if (value.length < 5) errors.push('at least 5 characters');
+    if (!/[A-Z]/.test(value)) errors.push('at least 1 uppercase letter');
+    if (!/[0-9]/.test(value)) errors.push('at least 1 number');
+    if (!/[^A-Za-z0-9]/.test(value)) errors.push('at least 1 special character');
+
+    if (errors.length > 0) {
+      errorEl.textContent = 'Username must contain: ' + errors.join(', ') + '.';
+      errorEl.style.display = 'block';
+      successEl.style.display = 'none';
+    } else {
+      errorEl.style.display = 'none';
+      successEl.style.display = 'block';
+    }
+  });
+
   // Build/update chart each time the Chart tab becomes visible
   const chartTabBtn = document.getElementById('chart-tab');
   chartTabBtn.addEventListener('click', () => {
