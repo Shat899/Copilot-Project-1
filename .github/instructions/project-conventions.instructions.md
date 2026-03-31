@@ -60,3 +60,6 @@ Always use these exact colors; do not introduce new accent colors.
 - Reuse the existing `barChart` variable; update data in place with `barChart.update()` rather than destroying and recreating
 - Chart type: `bar`, responsive, with legend at `position: 'top'`
 - X-axis labels: 3-letter month abbreviations (`Jan`, `Feb`, etc.)
+
+### UI elements
+All buttons must be a pink color.

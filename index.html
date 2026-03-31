@@ -37,6 +37,23 @@
   </nav>
 
   <div class="container">
+    <!-- Username Form -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <label for="usernameInput" class="form-label fw-semibold">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usernameInput"
+          placeholder="Enter username"
+          autocomplete="off"
+        />
+        <div id="usernameError" class="form-text text-danger mt-1" style="display:none;"></div>
+        <div id="usernameSuccess" class="form-text text-success mt-1" style="display:none;">Username accepted!</div>
+        <button class="btn btn-sm mt-3" id="usernameSubmit" style="background-color:#e91e8c;color:#fff;">Submit</button>
+      </div>
+    </div>
+
     <!-- Tabs -->
     <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
       <li class="nav-item" role="presentation">
@@ -119,5 +136,27 @@
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    document.getElementById('usernameSubmit').addEventListener('click', function () {
+      const value = document.getElementById('usernameInput').value;
+      const errorEl = document.getElementById('usernameError');
+      const successEl = document.getElementById('usernameSuccess');
+      const errors = [];
+
+      if (value.length < 5) errors.push('at least 5 characters');
+      if (!/[A-Z]/.test(value)) errors.push('at least 1 uppercase letter');
+      if (!/[0-9]/.test(value)) errors.push('at least 1 number');
+      if (!/[^A-Za-z0-9]/.test(value)) errors.push('at least 1 special character');
+
+      if (errors.length > 0) {
+        errorEl.textContent = 'Username must contain: ' + errors.join(', ') + '.';
+        errorEl.style.display = 'block';
+        successEl.style.display = 'none';
+      } else {
+        errorEl.style.display = 'none';
+        successEl.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
